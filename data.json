@@ -1,0 +1,26 @@
+[
+{
+	"id": 0,
+	"name": "Telematika",
+	"current": 28,
+	"total": 83,
+	"status": 1,
+	"waiting" : 15
+},
+{
+	"id": 1,
+	"name": "Informatika",
+	"current": 215,
+	"total": 823,
+	"status": 0,
+	"waiting" : 6
+},
+{
+	"id": 2,
+	"name": "Potvrde",
+	"current": 35,
+	"total": 73,
+	"status": 1,
+	"waiting" : 22
+}
+]
