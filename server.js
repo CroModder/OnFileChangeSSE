@@ -1,11 +1,6 @@
 var http = require('http');
 var fs = require('fs');
  
-/*
- * send interval in millis
- */
-var sendInterval =1500;
- 
 function sendServerSendEvent(req, res) {
  res.writeHead(200, {
  'Content-Type' : 'text/event-stream',
@@ -14,21 +9,23 @@ function sendServerSendEvent(req, res) {
  });
  
  
-fs.watchFile(__dirname + '/example.json', function(curr, prev) {
+fs.watchFile(__dirname + '/data.json', function(curr, prev) {
     console.log('promjena');
     // on file change we can read the new xml
-    fs.readFile(__dirname + '/example.json', function(err, data) {
+    fs.readFile(__dirname + '/data.json', function(err, data) {
       if (err) throw err;
       // send the new data to the client
       var sseId = (new Date()).toLocaleTimeString();
-      writeServerSendEvent(res, sseId, (new Date()).toLocaleTimeString());
+      podaci =
+      writeServerSendEvent(res, sseId, JSON.parse(data));
     });
   });
 }
  
 function writeServerSendEvent(res, sseId, data) {
- res.write('id: ' + sseId + '\n');
- res.write("data: new server event " + data + '\n\n');
+	res.write('retry: 300 \n');
+	res.write('id: ' + sseId + '\n');
+	res.write("data: " + JSON.stringify(data) + '\n\n');
 }
  
 http.createServer(function(req, res) {
